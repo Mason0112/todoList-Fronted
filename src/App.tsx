@@ -1,25 +1,34 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios'; // 匯入 axios 函式庫
-import type { Todo } from './types/task'; 
-import './App.css'; 
+import { useState, useEffect } from "react";
+import axios from "axios"; // 匯入 axios 函式庫
+import type { Todo } from "./types/task";
+import "./App.css";
+import { TodoList } from "./components/TodoList";
 
 function App() {
-  const [tasks, setTasks] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const handleToggleComplete = (id: number) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
   useEffect(() => {
     // 請將這裡的網址替換成你的 Kotlin 後端 API 網址
-    const backendUrl = 'http://localhost:8080/api/todos'; 
+    const backendUrl = "http://localhost:8080/api/todos";
 
     const fetchTasks = async () => {
       try {
         // 使用 axios.get() 發送 GET 請求
         const response = await axios.get<Todo[]>(backendUrl);
-        
+
         // Axios 自動將 JSON 資料放在 response.data 屬性中
         // TypeScript 也會根據泛型 <Task[]> 自動推斷型別
-        setTasks(response.data);
+        setTodos(response.data);
       } catch (e) {
         // Axios 的錯誤處理也更方便
         setError((e as Error).message);
@@ -42,16 +51,7 @@ function App() {
   return (
     <div className="App">
       <h1>我的任務列表</h1>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>
-            <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
-              {task.task}
-            </span>
-            <span> ({task.completed ? '已完成' : '未完成'})</span>
-          </li>
-        ))}
-      </ul>
+      <TodoList todos={todos} onToggleComplete={handleToggleComplete} />
     </div>
   );
 }
