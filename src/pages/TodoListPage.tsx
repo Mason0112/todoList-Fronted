@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import type { Todo } from "../types/task";
 import { TodoList } from "../components/TodoList";
+import apiClient from '../apiClient';
 
 export function TodoListPage() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -10,12 +10,12 @@ export function TodoListPage() {
 
   useEffect(() => {
     // 請將這裡的網址替換成你的 Kotlin 後端 API 網址
-    const backendUrl = "http://localhost:8080/api/todos";
+    const backendUrl = "/api/todos";
 
     const fetchTasks = async () => {
       try {
         // 使用 axios.get() 發送 GET 請求
-        const response = await axios.get(backendUrl);
+        const response = await apiClient.get(backendUrl);
 
         // Axios 自動將 JSON 資料放在 response.data 屬性中
         // TypeScript 也會根據泛型 <Task[]> 自動推斷型別
@@ -45,7 +45,7 @@ export function TodoListPage() {
     try {
       // 1. 發送 PUT 請求到後端，更新任務
       // 請將這裡的網址替換成你的後端 PUT/PATCH API 端點
-      await axios.put(`http://localhost:8080/api/todos/${id}`, updatedTodo);
+      await apiClient.put(`/todos/${id}`, updatedTodo);
 
       // 2. 如果請求成功，才更新前端狀態
       setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
@@ -59,7 +59,7 @@ export function TodoListPage() {
   const handelDelete = async (id: number) => {
     try {
        
-        await axios.delete(`http://localhost:8080/api/todos/${id}`);
+        await apiClient.delete(`/todos/${id}`);
         setTodos(todos.filter((todo) => todo.id !== id));
     } catch (error) {
          setError((error as Error).message);

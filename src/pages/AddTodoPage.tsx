@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import axios from "axios";
-import type { NewTodo } from '../types/task';
-import { useNavigate } from 'react-router-dom'; // 匯入 useNavigate
+import { useState } from "react";
+import type { NewTodo } from "../types/task";
+import { useNavigate } from "react-router-dom"; // 匯入 useNavigate
+import apiClient from '../apiClient';
 
 export function AddTodoPage() {
-  const [newTask, setNewTask] = useState('');
+  const [newTask, setNewTask] = useState("");
   const navigate = useNavigate(); // 取得 navigate 函式
 
   const handleAdd = async () => {
     // 檢查輸入框是否為空字串或只有空白
-    if (newTask.trim() === '') {
-      console.log('請輸入任務內容');
+    if (newTask.trim() === "") {
+      console.log("請輸入任務內容");
       return; // 如果為空，則終止函式
     }
 
@@ -22,19 +22,18 @@ export function AddTodoPage() {
 
     try {
       // 1. 將 newTodo 物件作為第二個參數傳送給 axios.post
-      await axios.post('http://localhost:8080/api/todos', newTodo);
-      
-      // 2. 如果請求成功，清空輸入框
-      setNewTask('');
-      // 使用 navigate 函式跳轉到主頁
-      navigate('/'); 
-      
-      // 3. 在這裡，你可以導航回主頁或顯示成功訊息
-      console.log('任務新增成功！');
+      await apiClient.post("/todos", newTodo);
 
+      // 2. 如果請求成功，清空輸入框
+      setNewTask("");
+      // 使用 navigate 函式跳轉到主頁
+      navigate("/");
+
+      // 3. 在這裡，你可以導航回主頁或顯示成功訊息
+      console.log("任務新增成功！");
     } catch (error) {
       // 如果請求失敗，印出錯誤訊息
-      console.error('任務新增失敗：', error);
+      console.error("任務新增失敗：", error);
       // 未來你可以在這裡用 useState 顯示錯誤訊息給使用者
     }
   };
