@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       {/* 導航列 */}
       <nav>
-        <Link to="/">任務列表</Link> | <Link to="/add">新增任務</Link>
+        <Link to="/todoListPage">任務列表</Link> | <Link to="/add">新增任務</Link>
       </nav>
 
       {/* 定義路由規則 */}

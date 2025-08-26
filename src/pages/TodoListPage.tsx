@@ -10,7 +10,7 @@ export function TodoListPage() {
 
   useEffect(() => {
     // 請將這裡的網址替換成你的 Kotlin 後端 API 網址
-    const backendUrl = "/api/todos";
+    const backendUrl = "/todos";
 
     const fetchTasks = async () => {
       try {

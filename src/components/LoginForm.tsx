@@ -1,56 +1,35 @@
 // src/components/LoginForm.tsx
 
 import React, { useState, type FormEvent } from "react";
-import apiClient from "../apiClient"; // 假設路徑是這個
-import axios from "axios";
-import type { LoginRequest } from "../types/user"; // 假設你的型別檔路徑是這個
+// Remove axios and apiClient imports
+import type { LoginRequest } from "../types/user"; 
 
-export function LoginForm() {
+// Define the props this component expects
+interface LoginFormProps {
+  onLogin: (formData: LoginRequest) => void;
+  // We can add props for loading and error states as well,
+  // since the parent will now manage them.
+  loading: boolean;
+  error: string | null;
+}
+
+export function LoginForm({ onLogin, loading, error }: LoginFormProps) {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+  // Remove loading and error states from this component
+  // We'll receive them from the parent as props
 
-  const handleSubmit = async (event: FormEvent) => {
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    setError(null);
-    setSuccess(null);
-    setLoading(true);
-    console.log(userName, password);
+    // Create the data object
+    const loginRequestData: LoginRequest = {
+      userName,
+      password,
+    };
 
-    try {
-      // 1. 創建一個符合 LoginRequest 型別的物件
-      const loginRequestData: LoginRequest = {
-        userName: userName,
-        password: password,
-      };
-
-      // 2. 將這個物件傳入 apiClient.post 的第二個參數
-      const response = await apiClient.post("/auth/login", loginRequestData);
-
-      const token = response.data.token;
-      if (token) {
-        localStorage.setItem("authToken", token);
-        setSuccess("登入成功！正在重新導向...");
-        console.log("Token 已儲存:", token);
-      } else {
-        setError("登入失敗：未取得 token。");
-      }
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        const errorMessage =
-          err.response?.data?.message || err.message || "發生未知錯誤";
-        setError(`登入失敗：${errorMessage}`);
-        console.error("登入錯誤:", err);
-      } else {
-        setError("發生未知錯誤，可能為網路問題");
-        console.error("非 Axios 錯誤:", err);
-      }
-    } finally {
-      setLoading(false);
-    }
+    // Call the onLogin callback with the form data
+    onLogin(loginRequestData);
   };
 
   return (
@@ -84,12 +63,14 @@ export function LoginForm() {
           />
         </div>
         <button type="submit" disabled={loading} className="submit-button">
+          {/* Use the loading prop from the parent */}
           {loading ? "登入中..." : "登入"}
         </button>
       </form>
 
+      {/* Use the error prop from the parent */}
       {error && <p className="message-error">{error}</p>}
-      {success && <p className="message-success">{success}</p>}
+      {/* Remove the success state since the parent will handle the redirect */}
     </div>
   );
 }
