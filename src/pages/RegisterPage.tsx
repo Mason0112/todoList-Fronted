@@ -1,14 +1,16 @@
-// src/pages/RegisterPage.tsx
-
 import React, { useState } from 'react';
 import { RegisterForm } from '../components/RegisterForm'; // 匯入 RegisterForm
 import apiClient from '../apiClient'; // 匯入 Axios 實例
 import axios from 'axios';
 import { type CreateUser } from '../types/user'; // 匯入型別
+import { useNavigate } from "react-router-dom"; // 匯入 useNavigate
+
+
 export function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate(); // 取得 navigate 函式
 
   // 處理來自 RegisterForm 的註冊邏輯
   const handleRegister = async (formData: CreateUser) => {
@@ -22,6 +24,8 @@ export function RegisterPage() {
       const response = await apiClient.post('/auth/register', formData);
       setSuccess('註冊成功！您現在可以登入了。');
       console.log('註冊成功:', response.data);
+
+      navigate("/");
 
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {

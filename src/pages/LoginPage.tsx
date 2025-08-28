@@ -5,10 +5,12 @@ import { LoginForm } from '../components/LoginForm';
 import apiClient from '../apiClient'; // The parent now imports and uses apiClient
 import axios from 'axios';
 import { type LoginRequest, type LoginResponse } from '../types/user';
+import { useNavigate } from "react-router-dom"; // 匯入 useNavigate
 
 export function LoginPage() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate(); // 取得 navigate 函式
 
   // This function will be passed to the child component
   const handleLogin = async (formData: LoginRequest) => {
@@ -25,6 +27,7 @@ export function LoginPage() {
         // Handle redirect logic here
         console.log("登入成功！Token 已儲存:", token);
         // window.location.href = "/dashboard"; // Example redirect
+        navigate("/todoListPage");
       } else {
         setError("登入失敗：未取得 token。");
       }

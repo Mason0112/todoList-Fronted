@@ -1,14 +1,8 @@
-// src/components/LoginForm.tsx
-
 import React, { useState, type FormEvent } from "react";
-// Remove axios and apiClient imports
-import type { LoginRequest } from "../types/user"; 
 
-// Define the props this component expects
+import type { LoginRequest } from "../types/user"; 
 interface LoginFormProps {
   onLogin: (formData: LoginRequest) => void;
-  // We can add props for loading and error states as well,
-  // since the parent will now manage them.
   loading: boolean;
   error: string | null;
 }
@@ -16,19 +10,15 @@ interface LoginFormProps {
 export function LoginForm({ onLogin, loading, error }: LoginFormProps) {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  // Remove loading and error states from this component
-  // We'll receive them from the parent as props
+
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    // Create the data object
     const loginRequestData: LoginRequest = {
       userName,
       password,
     };
-
-    // Call the onLogin callback with the form data
     onLogin(loginRequestData);
   };
 

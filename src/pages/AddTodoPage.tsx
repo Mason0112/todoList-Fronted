@@ -27,7 +27,7 @@ export function AddTodoPage() {
       // 2. 如果請求成功，清空輸入框
       setNewTask("");
       // 使用 navigate 函式跳轉到主頁
-      navigate("/");
+      navigate("/todoListPage");
 
       // 3. 在這裡，你可以導航回主頁或顯示成功訊息
       console.log("任務新增成功！");
