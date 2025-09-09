@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { RegisterForm } from '../components/RegisterForm'; // 匯入 RegisterForm
 import apiClient from '../apiClient'; // 匯入 Axios 實例
 import axios from 'axios';

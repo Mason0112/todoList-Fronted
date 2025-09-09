@@ -4,7 +4,7 @@ import axios, { type AxiosInstance, type InternalAxiosRequestConfig, type AxiosR
 
 // 接下來的程式碼保持不變
 const apiClient: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: '/api',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
