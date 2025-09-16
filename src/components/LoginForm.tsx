@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 
-import type { LoginRequest } from "../types/user"; 
+import type { LoginRequest } from "../types/User"; 
 interface LoginFormProps {
   onLogin: (formData: LoginRequest) => void;
   loading: boolean;

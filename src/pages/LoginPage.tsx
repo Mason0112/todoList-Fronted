@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { LoginForm } from '../components/LoginForm';
 import apiClient from '../apiClient'; // The parent now imports and uses apiClient
 import axios from 'axios';
-import { type LoginRequest, type LoginResponse } from '../types/user';
+import { type LoginRequest, type LoginResponse } from '../types/User';
 import { useNavigate } from "react-router-dom"; // 匯入 useNavigate
 
 export function LoginPage() {

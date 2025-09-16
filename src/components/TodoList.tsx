@@ -1,5 +1,5 @@
 import { TodoItem } from './TodoItem'; // 引入新的 TodoItem 元件
-import type { Todo } from '../types/task';
+import type { Todo } from '../types/Task';
 import '../css/TodoList.css';
 
 interface TodoListProps {

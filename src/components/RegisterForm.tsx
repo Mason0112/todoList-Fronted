@@ -1,7 +1,7 @@
 // src/components/RegisterForm.tsx
 
 import React, { useState } from 'react';
-import type { CreateUser } from '../types/user'; // 假設你的 types.ts 檔案在這裡
+import type { CreateUser } from '../types/User'; // 假設你的 types.ts 檔案在這裡
 import '../css/RegisterForm.css';
 
 

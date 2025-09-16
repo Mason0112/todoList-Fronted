@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { RegisterForm } from '../components/RegisterForm'; // 匯入 RegisterForm
 import apiClient from '../apiClient'; // 匯入 Axios 實例
 import axios from 'axios';
-import { type CreateUser } from '../types/user'; // 匯入型別
+import { type CreateUser } from '../types/User'; // 匯入型別
 import { useNavigate } from "react-router-dom"; // 匯入 useNavigate
 
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { Todo } from "../types/task";
+import type { Todo } from "../types/Task";
 import { TodoList } from "../components/TodoList";
 import apiClient from '../apiClient';
 

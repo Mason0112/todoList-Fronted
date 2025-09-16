@@ -1,6 +1,6 @@
 
 type UserRole = 'USER' | 'ADMIN';
-export interface Users {
+export interface User {
   id: number;
   userName: string;
   role: UserRole;
@@ -18,5 +18,5 @@ export interface CreateUser {
 
 export interface LoginResponse {
   token: string;
-  users: Users;
+  user: User;
 }

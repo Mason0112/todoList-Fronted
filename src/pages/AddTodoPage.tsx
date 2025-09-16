@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { NewTodo } from "../types/task";
+import type { NewTodo } from "../types/Task";
 import { useNavigate } from "react-router-dom"; // 匯入 useNavigate
 import apiClient from '../apiClient';
 

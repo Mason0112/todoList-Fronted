@@ -1,4 +1,4 @@
-import type { Todo } from '../types/task';
+import type { Todo } from '../types/Task';
 import '../css/TodoItem.css';
 
 interface TodoItemProps {
